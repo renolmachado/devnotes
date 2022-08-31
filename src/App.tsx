@@ -1,5 +1,5 @@
 import './App.css'
-import RichTextEditor from './components/rich-text-editor'
+import { TextEditor } from './components/text-editor'
 // import RichTextEditor from 'components/rich-text-editor'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="container">
       <h1>Welcome to Tauri! Renol Machado</h1>
 
-      <RichTextEditor />
+      <TextEditor />
     </div>
   )
 }
