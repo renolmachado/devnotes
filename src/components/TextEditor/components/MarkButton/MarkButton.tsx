@@ -7,6 +7,7 @@ import {
   AiOutlineUnderline,
 } from 'react-icons/ai'
 import { Format, Leaf } from '../../types'
+import { Button } from './MarkButton.styles'
 
 const isMarkActive = (editor: Editor, format: Format) => {
   const marks = Editor.marks(editor) as Leaf
@@ -27,7 +28,7 @@ interface Props {
   format: Format
 }
 
-const Icon = ({ format }: Props) => {
+const Icon = ({ format }: Pick<Props, 'format'>) => {
   if (format === 'bold') {
     return <AiOutlineBold />
   }
@@ -49,16 +50,19 @@ const Icon = ({ format }: Props) => {
 
 export const MarkButton = ({ format }: Props) => {
   const editor = useSlate()
+
+  console.log(isMarkActive(editor, format))
+
   return (
-    <button
+    <Button
       type="button"
-      // active={isMarkActive(editor, format)}
+      isActive={isMarkActive(editor, format)}
       onMouseDown={(event: any) => {
         event.preventDefault()
         toggleMark(editor, format)
       }}
     >
       <Icon format={format} />
-    </button>
+    </Button>
   )
 }
