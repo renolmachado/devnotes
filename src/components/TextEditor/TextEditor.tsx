@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react'
 import { createEditor } from 'slate'
-import { withReact, Slate, Editable } from 'slate-react'
+import { withReact, Slate } from 'slate-react'
+
 import { Leaf } from './components/Leaf/Leaf'
 import { Element } from './components/Element/Element'
 import { Descendant, RenderLeaf, RenderElement } from './types'
 import { Toolbar } from './components/Toolbar/Toolbar'
+import { Container, StyledEditable } from './TextEditor.styles'
 
 const initialValue: Descendant[] = [
   {
@@ -39,12 +41,10 @@ export const TextEditor = () => {
 
   return (
     <Slate editor={editor} value={initialValue}>
-      <Editable
-        style={{ border: '.2px solid' }}
-        renderLeaf={renderLeaf}
-        renderElement={renderElement}
-      />
-      <Toolbar />
+      <Container>
+        <StyledEditable renderLeaf={renderLeaf} renderElement={renderElement} />
+        <Toolbar />
+      </Container>
     </Slate>
   )
 }

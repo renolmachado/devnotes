@@ -51,8 +51,6 @@ const Icon = ({ format }: Pick<Props, 'format'>) => {
 export const MarkButton = ({ format }: Props) => {
   const editor = useSlate()
 
-  console.log(isMarkActive(editor, format))
-
   return (
     <Button
       type="button"
