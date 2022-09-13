@@ -1,5 +1,7 @@
 import React from 'react'
 
+export type Format = keyof Leaf
+
 export interface Leaf {
   text: string
   bold?: boolean

@@ -1,5 +1,5 @@
 import './App.css'
-import { TextEditor } from './components/text-editor'
+import { TextEditor } from './components/TextEditor'
 // import RichTextEditor from 'components/rich-text-editor'
 
 function App() {

@@ -39,11 +39,17 @@ export const Element = ({ attributes, children, element }: RenderElement) => {
           {children}
         </ol>
       )
-    default:
+    case 'paragraph':
       return (
         <p style={style} {...attributes}>
           {children}
         </p>
+      )
+    default:
+      return (
+        <div style={style} {...attributes}>
+          {children}
+        </div>
       )
   }
 }

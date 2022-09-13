@@ -1,16 +1,17 @@
 import { useCallback, useState } from 'react'
 import { createEditor } from 'slate'
 import { withReact, Slate, Editable } from 'slate-react'
-import { Leaf } from './components/leaf/Leaf'
-import { Element } from './components/element/Element'
+import { Leaf } from './components/Leaf/Leaf'
+import { Element } from './components/Element/Element'
 import { Descendant, RenderLeaf, RenderElement } from './types'
+import { Toolbar } from './components/Toolbar/Toolbar'
 
 const initialValue: Descendant[] = [
-  // {
-  //   type: 'paragraph',
-  //   children: [{ text: 'This is editable ' }],
-  //   style: { textAlign: 'left' },
-  // },
+  {
+    // type: '',
+    children: [{ text: 'This is editable ' }],
+    style: { textAlign: 'left' },
+  },
   // {
   //   type: 'block-quote',
   //   children: [{ text: 'A line of text in a paragraph.', code: true }],
@@ -33,17 +34,17 @@ export const TextEditor = () => {
   const [editor] = useState(() => withReact(createEditor()))
   const renderLeaf = useCallback((props: RenderLeaf) => <Leaf {...props} />, [])
   const renderElement = useCallback((props: RenderElement) => {
-    console.log(props, 'Element')
     return <Element {...props} />
   }, [])
 
   return (
     <Slate editor={editor} value={initialValue}>
       <Editable
-        style={{ border: '1px solid' }}
+        style={{ border: '.2px solid' }}
         renderLeaf={renderLeaf}
         renderElement={renderElement}
       />
+      <Toolbar />
     </Slate>
   )
 }

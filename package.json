@@ -11,14 +11,11 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@emotion/css": "^11.10.0",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/material": "^5.10.2",
     "@tauri-apps/api": "^1.0.2",
     "is-hotkey": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "slate": "^0.82.1",
     "slate-history": "^0.66.0",
