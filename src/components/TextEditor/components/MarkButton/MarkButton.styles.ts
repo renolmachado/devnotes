@@ -9,7 +9,7 @@ export const Button = styled.button<{ isActive: boolean }>`
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: var(--color-primary-0);
+  color: fff;
 
   ${(props) =>
     props.isActive &&

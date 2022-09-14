@@ -1,50 +1,28 @@
-import { useCallback, useState } from 'react'
-import { createEditor } from 'slate'
-import { withReact, Slate } from 'slate-react'
+import { useCallback } from 'react'
+import { Slate } from 'slate-react'
 
+import { Toolbar } from './components/Toolbar/Toolbar'
 import { Leaf } from './components/Leaf/Leaf'
 import { Element } from './components/Element/Element'
-import { Descendant, RenderLeaf, RenderElement } from './types'
-import { Toolbar } from './components/Toolbar/Toolbar'
 import { Container, StyledEditable } from './TextEditor.styles'
-
-const initialValue: Descendant[] = [
-  {
-    // type: '',
-    children: [{ text: 'This is editable ' }],
-    style: { textAlign: 'left' },
-  },
-  // {
-  //   type: 'block-quote',
-  //   children: [{ text: 'A line of text in a paragraph.', code: true }],
-  // },
-  // {
-  //   type: 'paragraph',
-  //   children: [{ text: 'A line of text in a paragraph.', italic: true }],
-  // },
-  // {
-  //   type: 'paragraph',
-  //   children: [{ text: 'A line of text in a paragraph.', underline: true }],
-  // },
-  // {
-  //   type: 'paragraph',
-  //   children: [{ text: 'A line of text in a paragraph.', bold: true }],
-  // },
-]
+import { useTextEditor } from './useTextEditor'
+import { RenderLeaf, RenderElement } from './types'
 
 export const TextEditor = () => {
-  const [editor] = useState(() => withReact(createEditor()))
+  const { editor, values, onChange } = useTextEditor()
+
   const renderLeaf = useCallback((props: RenderLeaf) => <Leaf {...props} />, [])
+
   const renderElement = useCallback((props: RenderElement) => {
     return <Element {...props} />
   }, [])
 
-  return (
-    <Slate editor={editor} value={initialValue}>
+  return values ? (
+    <Slate editor={editor} value={values} onChange={onChange as any}>
       <Container>
         <StyledEditable renderLeaf={renderLeaf} renderElement={renderElement} />
         <Toolbar />
       </Container>
     </Slate>
-  )
+  ) : null
 }
