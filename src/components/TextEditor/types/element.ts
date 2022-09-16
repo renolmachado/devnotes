@@ -1,6 +1,8 @@
 import React from 'react'
 import { Element as ElementToExtend } from 'slate'
 
+export type ElementFormat = ElementTypes
+
 export type ElementTypes =
   | 'block-quote'
   | 'bulleted-list'

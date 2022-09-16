@@ -1,6 +1,6 @@
 import React from 'react'
 
-export type Format = keyof Leaf
+export type LeafFormat = keyof Leaf
 
 export interface Leaf {
   text: string
@@ -8,6 +8,7 @@ export interface Leaf {
   italic?: boolean
   underline?: boolean
   code?: boolean
+  lineThrough?: boolean
 }
 
 export interface RenderLeaf {

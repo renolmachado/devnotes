@@ -11,7 +11,7 @@ export const Element = ({ attributes, children, element }: RenderElement) => {
       )
     case 'bulleted-list':
       return (
-        <ul style={style} {...attributes}>
+        <ul style={{ ...style, paddingLeft: '1rem' }} {...attributes}>
           {children}
         </ul>
       )
@@ -35,7 +35,7 @@ export const Element = ({ attributes, children, element }: RenderElement) => {
       )
     case 'numbered-list':
       return (
-        <ol style={style} {...attributes}>
+        <ol style={{ ...style, paddingLeft: '1rem' }} {...attributes}>
           {children}
         </ol>
       )

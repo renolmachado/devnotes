@@ -18,9 +18,10 @@ export const useHome = () => {
 
     const webview = new WebviewWindow(name, {
       url: `/note/${name}`,
-      width: 200,
-      height: 200,
+      width: 400,
+      height: 400,
       title: 'devnotes',
+      alwaysOnTop: true,
     })
     webview.setFocus()
   }, [])
