@@ -1,16 +1,16 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
   BaseDirectory,
+  readDir,
   createDir,
   writeFile,
   readTextFile as readTextFileFromFs,
 } from '@tauri-apps/api/fs'
 
-interface UseFileSystem {
-  folderName: string
-}
+export const useFileSystem = () => {
+  const folderNameRef = useRef(import.meta.env.VITE_LOCAL_FOLDER)
+  const folderName = folderNameRef.current as string
 
-export const useFileSystem = ({ folderName }: UseFileSystem) => {
   const createDataFolder = useCallback(async () => {
     await createDir(folderName, {
       dir: BaseDirectory.LocalData,
@@ -31,7 +31,9 @@ export const useFileSystem = ({ folderName }: UseFileSystem) => {
           }
         )
       } catch (e) {
-        console.log(e)
+        // TODO handle error
+        // eslint-disable-next-line no-console
+        console.error(e)
       }
     },
     [folderName]
@@ -55,6 +57,14 @@ export const useFileSystem = ({ folderName }: UseFileSystem) => {
     [folderName]
   )
 
+  const readDirFiles = useCallback(async () => {
+    const files = await readDir(folderName, {
+      dir: BaseDirectory.LocalData,
+    })
+
+    return files
+  }, [folderName])
+
   useEffect(() => {
     try {
       createDataFolder()
@@ -63,5 +73,5 @@ export const useFileSystem = ({ folderName }: UseFileSystem) => {
     }
   }, [createDataFolder])
 
-  return { createDataFile, readTextFile }
+  return { createDataFile, readTextFile, readDirFiles }
 }

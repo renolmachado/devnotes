@@ -8,8 +8,12 @@ import { Container, StyledEditable } from './TextEditor.styles'
 import { useTextEditor } from './useTextEditor'
 import { RenderLeaf, RenderElement } from './types'
 
-export const TextEditor = () => {
-  const { editor, values, onChange } = useTextEditor()
+interface Props {
+  fileName: string
+}
+
+export const TextEditor = ({ fileName }: Props) => {
+  const { editor, values, onChange } = useTextEditor(fileName)
 
   const renderLeaf = useCallback((props: RenderLeaf) => <Leaf {...props} />, [])
 

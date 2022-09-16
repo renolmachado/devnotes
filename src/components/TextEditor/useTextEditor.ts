@@ -6,13 +6,9 @@ import { useDebounce } from '../../hooks/useDebounce'
 import { useFileSystem } from '../../hooks/useFileSystem'
 import { Descendant } from './types'
 
-const FILE_NAME = 'notes' // TODO make this dynamic
-
-export const useTextEditor = () => {
+export const useTextEditor = (fileName: string) => {
   const isInitializedRef = useRef(false)
-  const { createDataFile, readTextFile } = useFileSystem({
-    folderName: 'dev-notes',
-  })
+  const { createDataFile, readTextFile } = useFileSystem()
   const [editor] = useState(() => withReact(createEditor()))
   const [values, setValues] = useState<Descendant[] | undefined>(undefined)
   const debouncedValues = useDebounce<Descendant[]>(values ?? [], 1000)
@@ -23,7 +19,7 @@ export const useTextEditor = () => {
 
   const initializeValues = useCallback(async () => {
     if (!isInitializedRef.current) {
-      const data = await readTextFile(FILE_NAME)
+      const data = await readTextFile(fileName)
       let defaultData: Descendant[] = [
         {
           children: [{ text: '' }],
@@ -39,14 +35,14 @@ export const useTextEditor = () => {
       setValues(defaultData)
       isInitializedRef.current = true
     }
-  }, [readTextFile])
+  }, [readTextFile, fileName])
 
   useEffect(() => {
     if (isInitializedRef.current) {
       const dataToSave = JSON.stringify(debouncedValues)
-      createDataFile(dataToSave, FILE_NAME)
+      createDataFile(dataToSave, fileName)
     }
-  }, [debouncedValues, createDataFile])
+  }, [debouncedValues, createDataFile, fileName])
 
   useEffect(() => {
     initializeValues()
