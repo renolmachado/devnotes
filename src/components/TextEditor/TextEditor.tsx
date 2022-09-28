@@ -24,7 +24,12 @@ export const TextEditor = ({ fileName }: Props) => {
   return values ? (
     <Slate editor={editor} value={values} onChange={onChange as any}>
       <Container>
-        <StyledEditable renderLeaf={renderLeaf} renderElement={renderElement} />
+        <StyledEditable
+          renderLeaf={renderLeaf}
+          renderElement={renderElement}
+          spellCheck
+          autoFocus
+        />
         <Toolbar />
       </Container>
     </Slate>

@@ -6,7 +6,9 @@ import {
   AiOutlineStrikethrough,
   AiOutlineUnorderedList,
   AiOutlineOrderedList,
+  AiOutlineCheckSquare,
 } from 'react-icons/ai'
+import { IoMdQuote } from 'react-icons/io'
 
 import { ElementFormat, LeafFormat } from '../../types'
 
@@ -41,6 +43,14 @@ export const Icon = ({ format }: Pick<Props, 'format'>) => {
 
   if (format === 'numbered-list') {
     return <AiOutlineOrderedList />
+  }
+
+  if (format === 'check-list-item') {
+    return <AiOutlineCheckSquare />
+  }
+
+  if (format === 'block-quote') {
+    return <IoMdQuote />
   }
 
   return null
