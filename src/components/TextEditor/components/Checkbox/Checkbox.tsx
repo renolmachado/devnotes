@@ -16,7 +16,6 @@ interface Props {
 const CheckListItemElement = ({ attributes, children, element }: Props) => {
   const editor = useSlateStatic() as ReactEditor
   const readOnly = useReadOnly()
-  console.log(element)
   const { checked } = element
 
   return (

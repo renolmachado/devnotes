@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createEditor } from 'slate'
 import { withReact } from 'slate-react'
-import { useDebounce } from '../../hooks/useDebounce'
 
+import { useDebounce } from '../../hooks/useDebounce'
 import { useFileSystem } from '../../hooks/useFileSystem'
 import { Descendant } from './types'
+import { handleKeyDown } from './functions'
 
 export const useTextEditor = (fileName: string) => {
   const isInitializedRef = useRef(false)
@@ -37,6 +38,11 @@ export const useTextEditor = (fileName: string) => {
     }
   }, [readTextFile, fileName])
 
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent) => handleKeyDown(editor)(event),
+    [editor]
+  )
+
   useEffect(() => {
     if (isInitializedRef.current) {
       const dataToSave = JSON.stringify(debouncedValues)
@@ -48,5 +54,5 @@ export const useTextEditor = (fileName: string) => {
     initializeValues()
   }, [initializeValues])
 
-  return { editor, values, onChange }
+  return { editor, values, onChange, onKeyDown }
 }

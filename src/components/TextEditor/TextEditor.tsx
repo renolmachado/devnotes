@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const TextEditor = ({ fileName }: Props) => {
-  const { editor, values, onChange } = useTextEditor(fileName)
+  const { editor, values, onChange, onKeyDown } = useTextEditor(fileName)
 
   const renderLeaf = useCallback((props: RenderLeaf) => <Leaf {...props} />, [])
 
@@ -25,6 +25,7 @@ export const TextEditor = ({ fileName }: Props) => {
     <Slate editor={editor} value={values} onChange={onChange as any}>
       <Container>
         <StyledEditable
+          onKeyDown={onKeyDown}
           renderLeaf={renderLeaf}
           renderElement={renderElement}
           spellCheck

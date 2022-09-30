@@ -1,16 +1,16 @@
 import { CSSProperties } from 'react'
 import { RenderLeaf as LeafProps } from '../../types'
+import Code from '../Code/Code'
 
 export const Leaf = ({ attributes, children, leaf }: LeafProps) => {
   const style: CSSProperties = {}
 
   if (leaf.bold) {
-    // children = <strong>{children}</strong>
     style.fontWeight = 'bold'
   }
 
   if (leaf.code) {
-    children = <code>{children}</code>
+    children = <Code>{children}</Code>
   }
 
   if (leaf.italic) {
@@ -19,14 +19,10 @@ export const Leaf = ({ attributes, children, leaf }: LeafProps) => {
   }
 
   if (leaf.underline) {
-    // children = <u>{children}</u>
     style.textDecoration = 'underline'
   }
 
   if (leaf.lineThrough) {
-    // children = (
-    //   <span style={{ textDecoration: 'line-through' }}>{children}</span>
-    // )
     style.textDecoration = 'line-through'
   }
 
