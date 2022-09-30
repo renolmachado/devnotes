@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createEditor } from 'slate'
 import { withReact } from 'slate-react'
+import { withHistory } from 'slate-history'
 
 import { useDebounce } from '../../hooks/useDebounce'
 import { useFileSystem } from '../../hooks/useFileSystem'
@@ -10,7 +11,7 @@ import { handleKeyDown } from './functions'
 export const useTextEditor = (fileName: string) => {
   const isInitializedRef = useRef(false)
   const { createDataFile, readTextFile } = useFileSystem()
-  const [editor] = useState(() => withReact(createEditor()))
+  const [editor] = useState(() => withReact(withHistory(createEditor())))
   const [values, setValues] = useState<Descendant[] | undefined>(undefined)
   const debouncedValues = useDebounce<Descendant[]>(values ?? [], 1000)
 
