@@ -1,3 +1,4 @@
+import { ElementFormat, LeafFormat } from '../types'
 import { handleElementHotKeys } from './handleElementsHotKeys'
 import { handleEnter } from './handleEnter'
 import { handleLeafHotKeys } from './handleLeafHotKeys'
@@ -22,4 +23,26 @@ export const HOTKEYS: HotKey = {
   ...LEAF_HOTKEYS,
   'shift+enter': handleShiftEnter,
   enter: handleEnter,
+}
+
+type BlockCommandsMapper = {
+  [key in ElementFormat]: string
+}
+
+type LeafCommandsMapper = {
+  [key in LeafFormat]: string
+}
+
+export const BLOCK_COMMANDS_HOTKEYS: Partial<BlockCommandsMapper> = {
+  'check-list-item': 'alt + c',
+  'bulleted-list': 'alt + b',
+  'block-quote': 'mod + q',
+}
+
+export const LEAF_COMMANDS_MAPPER: Partial<LeafCommandsMapper> = {
+  bold: 'mod + b',
+  italic: 'mod + i',
+  underline: 'mod + u',
+  code: 'mod + `',
+  lineThrough: 'mod + s',
 }

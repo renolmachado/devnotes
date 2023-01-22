@@ -1,5 +1,6 @@
 import { useSlate } from 'slate-react'
 
+import { BLOCK_COMMANDS_HOTKEYS } from '../../functions/hotkeys'
 import { ElementFormat } from '../../types'
 import { Icon } from '../Icon/Icon'
 import { Button } from './Buttons.styles'
@@ -11,8 +12,10 @@ interface Props {
 
 export const BlockButton = ({ format }: Props) => {
   const editor = useSlate()
+
   return (
     <Button
+      title={BLOCK_COMMANDS_HOTKEYS[format]}
       isActive={isBlockActive(
         editor,
         format,
