@@ -26,10 +26,12 @@ export const HOTKEYS: HotKey = {
 }
 
 type BlockCommandsMapper = {
+  // eslint-disable-next-line no-unused-vars
   [key in ElementFormat]: string
 }
 
 type LeafCommandsMapper = {
+  // eslint-disable-next-line no-unused-vars
   [key in LeafFormat]: string
 }
 
