@@ -1,26 +1,25 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 1.2rem;
+  justify-content: center;
 `
 
 export const Note = styled.div`
   display: flex;
-  width: 10rem;
-  height: 10rem;
   border-radius: 2rem;
-  padding: 1.8rem;
-  border: 0.5rem solid;
+  padding: 0.8rem;
+  border: 0.3rem solid;
   word-break: break-all;
   cursor: pointer;
 
-  & + & {
-    margin-left: 1rem;
-  }
-
   :hover {
-    filter: brightness(0.9);
+    filter: brightness(0.7);
   }
+`
+
+export const Title = styled.h1`
+  text-align: center;
+  width: 100%;
 `

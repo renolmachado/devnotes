@@ -1,4 +1,4 @@
-import { Container, Note } from './Home.styles'
+import { Container, Note, Title } from './Home.styles'
 import { useHome } from './useHome'
 
 const Home = () => {
@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>Bienvenido a Devnotes</h1>
+      <Title>Bienvenido a Devnotes</Title>
       <Container>
         {notes.map((note) => (
           <Note key={note.name} onClick={() => onNoteClick(note)}>
