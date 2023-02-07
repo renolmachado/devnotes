@@ -5,8 +5,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { useFileSystem } from '../../hooks/useFileSystem'
 
 export const useHome = () => {
-  const { readDirFiles } = useFileSystem()
+  const { readDirFiles, createDataFile } = useFileSystem()
   const [notes, setNotes] = useState<FileEntry[]>([])
+  const [newNoteName, setNewNoteName] = useState<string>('')
 
   const initializeNotes = useCallback(async () => {
     const files = await readDirFiles()
@@ -26,12 +27,28 @@ export const useHome = () => {
     webview.setFocus()
   }, [])
 
+  const addNewNote = useCallback(async () => {
+    const name = newNoteName
+    const emptyNote = ''
+
+    if (!notes.some((note) => note.name === `${name}.json`)) {
+      await createDataFile(emptyNote, name)
+      onNoteClick({ name: `${name}.json` } as FileEntry)
+
+      setNewNoteName('')
+      initializeNotes()
+    }
+  }, [newNoteName, notes, createDataFile, onNoteClick, initializeNotes])
+
   useEffect(() => {
     initializeNotes()
   }, [initializeNotes])
 
   return {
     notes,
+    newNoteName,
+    setNewNoteName,
     onNoteClick,
+    addNewNote,
   }
 }
